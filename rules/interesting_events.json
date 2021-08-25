@@ -26,6 +26,263 @@
             "event_filter": {
                 "EventID": 4740
             }
+        },
+        {
+            "rule_name": "RDP Logon Success",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
+            "event_filter": {
+                "EventID": 4625,
+				"LogonType": 10
+            }
+        },
+        {
+            "rule_name": "RDP Logon Fail",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
+            "event_filter": {
+                "EventID": 4624,
+				"LogonType": 10
+            }
+        },
+        {
+            "rule_name": "Network Logon Success",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
+            "event_filter": {
+                "EventID": 4625,
+				"LogonType": 3
+            }
+        },
+        {
+            "rule_name": "Network Logon Fail",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
+            "event_filter": {
+                "EventID": 4624,
+				"LogonType": 3
+            }
+        },
+        {
+            "rule_name": "Create User",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "event_filter": {
+                "EventID": 4720
+            }
+        },
+        {
+            "rule_name": "Add user to group",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "event_filter": {
+                "EventID": 4732
+            }
+        },
+        {
+            "rule_name": "Add user to groups",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "event_filter": {
+                "EventID": 4728
+            }
+        },
+        {
+            "rule_name": "Windows Defender Anti Virus Logs",
+            "event_channel": "Microsoft-Windows-Windows Defender/Operational",
+            "log_full_event": false,
+            "log_fields": ["Computer", "Detection Time", "Threat Name","TargetDomainName", "Process Name", "Path"],
+            "event_filter": {
+                "EventID": 1116
+            }
+        },
+        {
+            "rule_name": "Windows Defender Anti Virus Infos",
+            "event_channel": "Microsoft-Windows-Windows Defender/Operational",
+            "log_full_event": false,
+            "log_fields": ["Computer", "Detection Time", "Threat Name","TargetDomainName", "Process Name", "Path"],
+            "event_filter": {
+				"EventID": 1117
+            }
+        },
+        {
+            "rule_name": "Process Create CommandLine",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["ParentImage", "Detection Time", "User","CurrentDirectory", "Image", "ParentCommandLine", "Hashes"],
+            "event_filter": {
+				"EventID": 1
+            }
+        },
+        {
+            "rule_name": "Network connection detected",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["Image", "User", "Protocol", "SourceHostname", "SourceIp", "SourcePort", "DestinationIp", "DestinationPort"],
+            "event_filter": {
+				"EventID": 3
+            }
+        },
+        {
+            "rule_name": "Process terminated",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["Image"],
+            "event_filter": {
+				"EventID": 5
+            }
+        },
+        {
+            "rule_name": "Image loaded",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["Image", "ImageLoaded", "Description", "Hashes"],
+            "event_filter": {
+				"EventID": 7
+            }
+        },
+        {
+            "rule_name": "Process accessed",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["SourceImage", "TargetImage", "CallTrace"],
+            "event_filter": {
+				"EventID": 10
+            }
+        },
+        {
+            "rule_name": "File created",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["Image", "TargetFilename"],
+            "event_filter": {
+				"EventID": 11
+            }
+        },
+        {
+            "rule_name": "Registry object added or deleted",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["RuleName", "EventType", "ProcessId", "Image", "TargetObject"],
+            "event_filter": {
+				"EventID": 12
+            }
+        },
+        {
+            "rule_name": "Registry value set",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["RuleName", "Image", "TargetObject", "Details"],
+            "event_filter": {
+				"EventID": 13
+            }
+        },
+        {
+            "rule_name": "WmiEventFilter activity detected",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["User", "EventNamespace", "User", "Name", "Query"],
+            "event_filter": {
+				"EventID": 19
+            }
+        },
+        {
+            "rule_name": "WmiEventConsumer activity detected",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["User", "Name", "Destination", "Operation"],
+            "event_filter": {
+				"EventID": 20
+            }
+        },
+        {
+            "rule_name": "WmiEventConsumerToFilter activity detected",
+            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "log_full_event": false,
+            "log_fields": ["User", "Consumer", "Filter", "Operation"],
+            "event_filter": {
+				"EventID": 21
+            }
+        },
+        {
+            "rule_name": "Zerologon CVE-2020-1472 DFIR System NetLogon Error EventID 5805",
+            "event_channel": "System",
+            "log_full_event": false,
+            "log_fields": ["User", "Consumer", "Filter", "Operation"],
+            "event_filter": {
+				"EventID": 5805
+            }
+        },
+        {
+            "rule_name": "Zerologon VoidSec CVE-2020-1472 4626 LT3 Anonym follwedby 4742 DC Anony DC",
+            "event_channel": "Microsoft-Windows-PowerShell/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID", "TargetUserName", "TargetDomainName", "SubjectUserName", "SubjectDomainName"],
+            "event_filter": {
+                "EventID": 4742                
+            }
+        },
+        {
+            "rule_name": "phish windows credentials powershell scriptblockLog 4104",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "ScriptBlockText"],
+            "event_filter": {
+                "EventID": 4104                
+            }
+        },
+        {
+            "rule_name": "Exec via cpl Application Experience EventID 17 ControlPanelApplet",
+            "event_channel": "Microsoft-Windows-Application-Experience/Program-Compatibility-Assistant",
+            "log_full_event": false,
+            "log_fields": ["EventID", "ExePath", "ExePath"],
+            "event_filter": {
+                "EventID": 17                
+            }
+        },
+        {
+            "rule_name": "temp scheduled task 4698 4699",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "TaskName", "TaskContent"],
+            "event_filter": {
+                "EventID": 4699                
+            }
+        },
+        {
+            "rule_name": "exec emotet ps 800 get-item",
+            "event_channel": "Windows PowerShell",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "EventData"],
+            "event_filter": {
+                "EventID": 800
+            }
+        },
+        {
+            "rule_name": "exec emotet ps 4104",
+            "event_channel": "Microsoft-Windows-PowerShell/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "ScriptBlockText"],
+            "event_filter": {
+                "EventID": 800
+            }
+        },
+        {
+            "rule_name": "尝试连接到服务器",
+            "event_channel": "Microsoft-Windows-TerminalServices-RDPClient/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Name", "Value"],
+            "event_filter": {
+                "EventID": 1024
+            }
         }
+
     ]
 }
