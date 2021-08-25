@@ -11,7 +11,7 @@ def create_log_fields_string(event, log_fields):
     output_strings = list()
     for field in log_fields:
         if field in event["Event"]["EventData"]:
-            output_strings.append(field + ":" + event["Event"]["EventData"][field])
+            output_strings.append(field + ":" + str(event["Event"]["EventData"][field]))
 
     return "\n\n".join(output_strings)
 
