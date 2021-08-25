@@ -73,12 +73,13 @@ def main():
     children.append(html.Hr())
     children.append(html.H2(children="Interesting event rules"))
     children.append(html.Hr())
-
-    for rule in utils.retrieve_all_occurence_rules():
+    nav_list=[]
+    for rule in utils.retrieve_all_occurence_rules():        
         occurence_table = table.create_interesting_events_table(rule)
-
-        children.append(html.H3(children=rule["rule_name"]))
-        children.append(occurence_table)
+        if len(occurence_table.data)>0:
+            children.append(html.H3(children=rule["rule_name"], id=rule["rule_name"]))
+            children.append(occurence_table)
+            nav_list.append(html.Li(html.A(rule["rule_name"], className="nav-item nav-link btn", href='#'+ rule["rule_name"],style={'text-decoration':'none'})))
 
     # first occurence rules
     children.append(html.Hr())
@@ -87,13 +88,19 @@ def main():
 
     for rule in utils.retrieve_all_first_occurence_rules():
         first_occurence_table = table.create_first_occurence_table(rule)
+        if len(first_occurence_table.data)>0:
+            children.append(html.H3(children=rule["rule_name"], id=rule["rule_name"]))
+            children.append(first_occurence_table)
+            nav_list.append(html.Li(html.A(rule["rule_name"], className="nav-item nav-link btn", href='#'+ rule["rule_name"],style={'text-decoration':'none'})))
 
-        children.append(html.H3(children=rule["rule_name"]))
-        children.append(first_occurence_table)
+    # nav content
+    nav=html.Nav(className = "nav nav-pills", children=nav_list,style={'position':'fixed','float': 'left', 'width':'18%', 'overflow':'scroll','top':'0','bottom':'0'})
+    #vars.DASH_APP.layout = html.Div(children=nav)
+
+    content=html.Div(children=children,style={'width': '80%', 'margin': 'auto', 'float':'right'})
 
     # layout the entire page
-    vars.DASH_APP.layout = html.Div(children=children,
-                                    style={'width': '80%', 'margin': 'auto'})
+    vars.DASH_APP.layout = html.Div(children=[nav,content])
 
 
 if __name__ == "__main__":
