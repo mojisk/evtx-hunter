@@ -59,14 +59,14 @@ def normalize_event(event):
 
     return event
 
-
+#读取规则
 def retrieve_all_occurence_rules():
-    for rule_info in json.load(open(vars.RULE_DIR + "interesting_events.json", 'r'))["rules"]:
+    for rule_info in json.load(open(vars.RULE_DIR + "interesting_events.json", 'r',encoding='utf-8'))["rules"]:
         yield rule_info
 
-
+#读取规则
 def retrieve_all_first_occurence_rules():
-    for rule_info in json.load(open(vars.RULE_DIR + "first_occurence.json", 'r'))["rules"]:
+    for rule_info in json.load(open(vars.RULE_DIR + "first_occurence.json", 'r', encoding='utf-8'))["rules"]:
         yield rule_info
 
 
