@@ -1,3 +1,4 @@
+
 import argparse
 import os
 import vars
@@ -27,8 +28,8 @@ def main():
 
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
     vars.DASH_APP = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-    vars.DASH_APP.title = "evtx-hunter"
-
+    vars.DASH_APP.title = "evtx-hunter事件日志分析"
+    vars.DASH_APP.charSet="utf-8"
     utils.remove_all_tmp_json_files()
     utils.load_event_id_mappings()
 
