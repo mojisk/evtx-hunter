@@ -5,7 +5,7 @@ import pandas as pd
 import hashlib
 import logging
 import json
-from datetime import datetime
+from datetime import datetime,timedelta
 
 
 def create_filename_summary_table():
@@ -61,7 +61,12 @@ def create_interesting_events_table(rule_dict):
         if event_matches_filter:
             # If we reach here, then we have filtered out all non-matching events
             time_string = event["Event"]["System"]["TimeCreated"]["#attributes"]["SystemTime"]
-            event_date = datetime.fromisoformat(time_string.replace('Z', '+00:00'))
+            #event_date = datetime.fromisoformat(time_string.replace('Z', '+08:00')) #原始时间转换为0时区
+            # 以下两行为修改成8时区          
+            _date = datetime.strptime(time_string,"%Y-%m-%dT%H:%M:%S.%fZ")
+            event_date = _date + timedelta(hours=8)
+            
+
 
             graph_data_dict["timestamp"].append(event_date)
 
