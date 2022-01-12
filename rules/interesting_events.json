@@ -10,7 +10,7 @@
             }
         },
         {
-            "rule_name": "New service installed",
+            "rule_name": "New service installed 安装新的服务",
             "event_channel": "System",
             "log_fields": ["ImagePath", "Computer"],
             "log_full_event": false,
@@ -19,7 +19,7 @@
             }
         },
         {
-            "rule_name": "A user account was locked out",
+            "rule_name": "A user account was locked out 查找AD中用户账户锁定时间及锁定的计算机",
             "event_channel": "Security",
             "log_full_event": false,
             "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
@@ -28,47 +28,43 @@
             }
         },
         {
-            "rule_name": "RDP Logon Success",
+            "rule_name": "Logon Success 登录成功",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "LogonType", "Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress", "ProcessName", "LogonProcessName"],
+            "event_filter": {
+                "EventID": 4624
+            }
+        },
+        {
+            "rule_name": "远程注销时间",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "LogonType", "TargetUserName","TargetDomainName","TargetDomainName"],
+            "event_filter": {
+                "EventID": 4634
+            }
+        },
+        {
+            "rule_name": "Logon Fail 登录失败",
             "event_channel": "Security",
             "log_full_event": false,
             "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
             "event_filter": {
-                "EventID": 4625,
-				"LogonType": 10
+                "EventID": 4625
             }
         },
         {
-            "rule_name": "RDP Logon Fail",
+            "rule_name": "管理员账户登录",
             "event_channel": "Security",
             "log_full_event": false,
-            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
+            "log_fields": ["EventID","Computer", "AccountName","AccountDomain"],
             "event_filter": {
-                "EventID": 4624,
-				"LogonType": 10
+                "EventID": 4672
             }
         },
         {
-            "rule_name": "Network Logon Success",
-            "event_channel": "Security",
-            "log_full_event": false,
-            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
-            "event_filter": {
-                "EventID": 4625,
-				"LogonType": 3
-            }
-        },
-        {
-            "rule_name": "Network Logon Fail",
-            "event_channel": "Security",
-            "log_full_event": false,
-            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
-            "event_filter": {
-                "EventID": 4624,
-				"LogonType": 3
-            }
-        },
-        {
-            "rule_name": "Create User",
+            "rule_name": "Create User创建用户",
             "event_channel": "Security",
             "log_full_event": false,
             "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
@@ -77,7 +73,16 @@
             }
         },
         {
-            "rule_name": "Add user to group",
+            "rule_name": "Delete User删除用户",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID","Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "event_filter": {
+                "EventID": 4726
+            }
+        },
+        {
+            "rule_name": "Add user to group 添加用到到启动安全性的本地组中",
             "event_channel": "Security",
             "log_full_event": false,
             "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
@@ -86,12 +91,21 @@
             }
         },
         {
-            "rule_name": "Add user to groups",
+            "rule_name": "Add user to groups 添加用到到启动安全性的全局组中",
             "event_channel": "Security",
             "log_full_event": false,
-            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "log_fields": ["EventID", "Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
             "event_filter": {
                 "EventID": 4728
+            }
+        },
+        {
+            "rule_name": "Add user to groups 将成员添加到启用安全的通用组中",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "event_filter": {
+                "EventID": 4756
             }
         },
         {
@@ -203,12 +217,30 @@
             }
         },
         {
-            "rule_name": "WmiEventConsumerToFilter activity detected",
-            "event_channel": "Microsoft-Windows-Sysmon/Operational",
+            "rule_name": "远程桌面服务：会话登陆成功",
+            "event_channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
             "log_full_event": false,
-            "log_fields": ["User", "Consumer", "Filter", "Operation"],
+            "log_fields": ["EventID","User", "ComputerName", "Source Network Address"],
             "event_filter": {
 				"EventID": 21
+            }
+        },
+        {
+            "rule_name": "远程桌面服务：会话已断开连接",
+            "event_channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID","User", "ComputerName", "Source Network Address"],
+            "event_filter": {
+				"EventID": 24
+            }
+        },
+        {
+            "rule_name": "远程桌面服务：会话重新连接成功",
+            "event_channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID","User", "ComputerName", "Source Network Address"],
+            "event_filter": {
+				"EventID": 25
             }
         },
         {
@@ -281,6 +313,87 @@
             "log_fields": ["EventID", "Name", "Value"],
             "event_filter": {
                 "EventID": 1024
+            }
+        },
+        {
+            "rule_name": "远程桌面连接",
+            "event_channel": "Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "UserData"],
+            "event_filter": {
+                "EventID": 1149
+            }
+        },
+        {
+            "rule_name": "接受远程桌面服务",
+            "event_channel": "Microsoft-Windows-TerminalServices-RemoteConnectionManager/Admin",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer", "UserData"],
+            "event_filter": {
+                "EventID": 1158
+            }
+        },
+        {
+            "rule_name": "操作系统启动时间",
+            "event_channel": "System",
+            "log_full_event": false,
+            "log_fields": ["EventID"],
+            "event_filter": {
+                "EventID": 12
+            }
+        },
+        {
+            "rule_name": "系统重启",
+            "event_channel": "System",
+            "log_full_event": false,
+            "log_fields": ["EventID"],
+            "event_filter": {
+                "EventID": 1074
+            }
+        },
+        {
+            "rule_name": "已枚举用户的本地组成员身份",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "TargetDomainName", "CallerProcessName"],
+            "event_filter": {
+                "EventID": 4798
+            }
+        },
+        {
+            "rule_name": "已枚举启用安全保护的本地组成员身份。",
+            "event_channel": "Security",
+            "log_full_event": false,
+            "log_fields": ["EventID", "TargetDomainName","EventData"],
+            "event_filter": {
+                "EventID": 4799
+            }
+        },
+        {
+            "rule_name": "Powershell命令执行记录",
+            "event_channel": "Microsoft-Windows-PowerShell/Operational",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer","ScriptBlockText"],
+            "event_filter": {
+                "EventID": 4104
+            }
+        },
+        {
+            "rule_name": "Powershell提供程序生命周期",
+            "event_channel": "Windows PowerShell",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer","EventData"],
+            "event_filter": {
+                "EventID": 600
+            }
+        },
+        {
+            "rule_name": "Powershell引擎生命周期",
+            "event_channel": "Windows PowerShell",
+            "log_full_event": false,
+            "log_fields": ["EventID", "Computer","EventData"],
+            "event_filter": {
+                "EventID": 400
             }
         }
 
