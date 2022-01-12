@@ -24,10 +24,20 @@
             "rule_name": "First time observing failed logon",
             "event_channel": "Security",
             "monitored_field": "TargetUserName",
-            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName"],
+            "log_fields": ["Computer", "SubjectDomainName", "SubjectUserName","TargetDomainName", "TargetUserName", "IpAddress"],
             "log_full_event":  false,
             "event_filter": {
                 "EventID": 4625
+            }
+        },
+        {
+            "rule_name": "first New service installed",
+            "event_channel": "System",
+            "monitored_field": "ImagePath",
+            "log_fields": ["ImagePath", "Computer"],
+            "log_full_event":  false,
+            "event_filter": {
+                "EventID": 7045
             }
         }
     ]
