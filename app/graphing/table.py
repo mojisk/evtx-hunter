@@ -63,7 +63,11 @@ def create_interesting_events_table(rule_dict):
             time_string = event["Event"]["System"]["TimeCreated"]["#attributes"]["SystemTime"]
             #event_date = datetime.fromisoformat(time_string.replace('Z', '+08:00')) #原始时间转换为0时区
             # 以下两行为修改成8时区          
-            _date = datetime.strptime(time_string,"%Y-%m-%dT%H:%M:%S.%fZ")
+            _date=None
+            try:
+                _date = datetime.strptime(time_string,"%Y-%m-%dT%H:%M:%S.%fZ")
+            except:
+                _date = datetime.strptime(time_string,"%Y-%m-%dT%H:%M:%SZ")
             event_date = _date + timedelta(hours=8)
             
 
